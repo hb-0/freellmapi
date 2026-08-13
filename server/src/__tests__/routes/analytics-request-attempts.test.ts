@@ -4,7 +4,7 @@ import { createApp } from '../../app.js';
 import { getDb, initDb } from '../../db/index.js';
 import { mintDashboardToken } from '../helpers/auth.js';
 import { clientContextMiddleware } from '../../lib/client-context.js';
-import { setRequestShape, summarizeRequestMessages } from '../../lib/client-context.js';
+import { setRequestShape, summarizeRequestMessages, setRequestBody } from '../../lib/client-context.js';
 import { logRequest } from '../../lib/request-log.js';
 
 // Read surface for per-attempt routing traces: the requests list carries a
@@ -110,8 +110,8 @@ describe('per-attempt traces in the analytics requests API', () => {
 
   it('returns the inbound message shape and nulls for pre-migration rows', async () => {
     const shaped = getDb().prepare(`
-      INSERT INTO requests (platform, model_id, status, input_tokens, output_tokens, latency_ms, error, message_count, role_sequence, has_tool_calls, has_reasoning, created_at)
-      VALUES ('cerebras', 'qwen-z', 'error', 10, 0, 50, 'boom', 5, 'user,assistant,tool,user', 1, 1, ?)
+      INSERT INTO requests (platform, model_id, status, input_tokens, output_tokens, latency_ms, error, message_count, role_sequence, has_tool_calls, has_reasoning, request_body, created_at)
+      VALUES ('cerebras', 'qwen-z', 'error', 10, 0, 50, 'boom', 5, 'user,assistant,tool,user', 1, 1, '{"messages":[{"role":"user","content":"hi"}]}', ?)
     `).run(recentSql(14));
     const legacy = insertRequest('error', recentSql(15));
 
@@ -122,6 +122,7 @@ describe('per-attempt traces in the analytics requests API', () => {
       roleSequence: 'user,assistant,tool,user',
       hasToolCalls: true,
       hasReasoning: true,
+      requestBody: '{"messages":[{"role":"user","content":"hi"}]}',
     });
 
     const legacyDetail = await request(app, `/api/analytics/requests/${legacy}`);
@@ -131,6 +132,7 @@ describe('per-attempt traces in the analytics requests API', () => {
       roleSequence: null,
       hasToolCalls: null,
       hasReasoning: null,
+      requestBody: null,
     });
   });
 
@@ -147,6 +149,7 @@ describe('per-attempt traces in the analytics requests API', () => {
     let loggedId = 0;
     clientContextMiddleware(fakeReq, {} as any, () => {
       setRequestShape(summarizeRequestMessages(messages));
+      setRequestBody({ model: 'test-model', messages });
       logRequest('test', 'test-model', 1, 'success', 1, 2, 3, null);
       loggedId = (getDb().prepare('SELECT id FROM requests ORDER BY id DESC LIMIT 1').get() as { id: number }).id;
     });
@@ -160,5 +163,9 @@ describe('per-attempt traces in the analytics requests API', () => {
       hasToolCalls: true,
       hasReasoning: false,
     });
+    const parsedBody = JSON.parse(body.requestBody);
+    expect(parsedBody.model).toBe('test-model');
+    expect(parsedBody.messages).toHaveLength(4);
+    expect(parsedBody.messages[0]).toEqual({ role: 'user', content: 'use the tool' });
   });
 });

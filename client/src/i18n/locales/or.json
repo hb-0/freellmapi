@@ -617,6 +617,7 @@
     "shapeToolCalls": "With tool calls",
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
+    "requestBody": "Request body",
     "requestsByAgent": "ଏଜେଣ୍ଟ ଦ୍ୱାରା ଅନୁରୋଧଗୁଡିକ"
   },
   "playground": {

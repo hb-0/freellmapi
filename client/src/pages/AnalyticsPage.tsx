@@ -12,6 +12,7 @@ import {
   Braces,
   ChartLine,
   CheckCircle2,
+  ChevronDown,
   CircleAlert,
   CircleDollarSign,
   Clock,
@@ -196,6 +197,9 @@ interface RequestDetail extends Omit<RecentCallRow, 'attemptCount'> {
   roleSequence: string | null
   hasToolCalls: boolean | null
   hasReasoning: boolean | null
+  // Debug: full inbound body JSON text, null for pre-migration or non-chat
+  // rows.
+  requestBody: string | null
 }
 
 type StatusFilter = 'all' | 'success' | 'error' | 'canceled'
@@ -294,6 +298,17 @@ function ShapeBadge({ label, present }: { label: string; present: boolean }) {
   )
 }
 
+// Pretty-print the stored request body for the debug viewer; falls back to
+// the raw text when the payload was truncated mid-JSON (serializeRequestBody
+// appends a visible marker before the cut).
+function formatRequestBody(raw: string): string {
+  try {
+    return JSON.stringify(JSON.parse(raw), null, 2)
+  } catch {
+    return raw
+  }
+}
+
 // Per-request drill-down: the parent row's fields plus the failover ladder —
 // one entry per dispatched attempt (ordinal → provider/model → key ordinal →
 // outcome → timing, with the redacted per-hop error when one was recorded).
@@ -301,6 +316,7 @@ function ShapeBadge({ label, present }: { label: string; present: boolean }) {
 // than a routed page so the list's range/filter context stays put behind it.
 function RequestDetailDialog({ requestId, onClose }: { requestId: number | null; onClose: () => void }) {
   const { t } = useI18n()
+  const [bodyOpen, setBodyOpen] = useState(false)
 
   const { data: detail, isLoading } = useQuery({
     queryKey: ['analytics', 'request-detail', requestId],
@@ -390,6 +406,28 @@ function RequestDetailDialog({ requestId, onClose }: { requestId: number | null;
                     <p className="text-xs font-mono tabular-nums truncate" title={detail.roleSequence ?? '—'}>{detail.roleSequence ?? '—'}</p>
                   </div>
                 </div>
+              </div>
+            )}
+
+            {detail.requestBody && (
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setBodyOpen(o => !o)}
+                  className="flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors hover:bg-muted/40"
+                  aria-expanded={bodyOpen}
+                >
+                  <span className="flex items-center gap-2 text-sm font-medium">
+                    <Braces className="size-4 text-muted-foreground" aria-hidden="true" />
+                    {t('analytics.requestBody')}
+                  </span>
+                  <ChevronDown className={`size-4 text-muted-foreground transition-transform ${bodyOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+                </button>
+                {bodyOpen && (
+                  <pre className="mt-2 max-h-[300px] overflow-auto rounded-xl border bg-muted/40 p-3 text-[11px] leading-relaxed font-mono whitespace-pre-wrap break-words">
+                    {formatRequestBody(detail.requestBody)}
+                  </pre>
+                )}
               </div>
             )}
 

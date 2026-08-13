@@ -36,7 +36,7 @@ import { enforceJsonContent } from '../lib/structured-output.js';
 import { sanitizeProviderErrorMessage } from '../lib/error-redaction.js';
 import { isClientAbortError, newClientAbortError } from '../lib/error-classify.js';
 import { inferQuotaPoolKey, type QuotaObservationContext } from '../services/provider-quota.js';
-import { setRequestShape, summarizeRequestMessages } from '../lib/client-context.js';
+import { setRequestShape, summarizeRequestMessages, setRequestBody } from '../lib/client-context.js';
 import { compressRequest, formatCompressionHeader } from '../services/compression/pipeline.js';
 
 export const responsesRouter = Router();
@@ -538,6 +538,9 @@ responsesRouter.post('/responses', async (req: Request, res: Response) => {
   // (#750): item count, role/type sequence, tool_calls / thinking presence —
   // no content is retained.
   setRequestShape(summarizeRequestMessages(reqData.input));
+  // Debug: keep the full parsed body so a provider 4xx can be reproduced
+  // from the analytics drill-down (image data-URIs redacted, capped at 1 MiB).
+  setRequestBody(reqData);
 
   // Computer use can't survive the chat-completions translation either (no
   // computer tool, no screenshot context). Fail clearly instead of silently

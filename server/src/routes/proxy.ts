@@ -21,7 +21,7 @@ import { isFusionModel, runFusion, fusionConfigSchema, FusionError, FUSION_MODEL
 import { isRetryableError, isPaymentRequiredError, isModelNotFoundError, isModelAccessForbiddenError, isClientAbortError, newClientAbortError } from '../lib/error-classify.js';
 import { logRequest } from '../lib/request-log.js';
 import { observeServedModel } from '../lib/served-model.js';
-import { setRequestShape, summarizeRequestMessages } from '../lib/client-context.js';
+import { setRequestShape, summarizeRequestMessages, setRequestBody } from '../lib/client-context.js';
 import { parseCacheDirective, cacheActive, isCacheableTemperature, computeCacheKey, getCachedResponse, storeCachedResponse } from '../services/cache.js';
 import { runFallbackLoop, newFallbackState, recordUpstreamSuccess, exhaustedRetryError, setFallbackHeaders, exhaustionErrorPayload, setExhaustionHeaders, type AttemptRecord } from '../lib/fallback-loop.js';
 import { routedViaValue, safeHeaderValue } from '../lib/header-value.js';
@@ -1263,6 +1263,9 @@ proxyRouter.post('/chat/completions', async (req: Request, res: Response) => {
   // (#750): message count, role sequence, tool_calls / thinking presence —
   // no content is retained.
   setRequestShape(summarizeRequestMessages(parsed.data.messages));
+  // Debug: keep the full parsed body so a provider 4xx can be reproduced
+  // from the analytics drill-down (image data-URIs redacted, capped at 1 MiB).
+  setRequestBody(parsed.data);
   const requestedModelLabel = requestedModel ?? 'auto';
   // Agent-tolerant knob normalization (#200): max_tokens <= 0 means "no
   // limit" in several clients → unset; tool_choice 'any' is OpenAI's

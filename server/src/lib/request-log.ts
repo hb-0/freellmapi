@@ -1,6 +1,6 @@
 import { getDb } from '../db/index.js';
 import { pruneRequestAnalytics } from '../services/request-retention.js';
-import { getClientContext, getRequestShape } from './client-context.js';
+import { getClientContext, getRequestShape, getRequestBody } from './client-context.js';
 import { noteRequestRowId, type RequestTrace } from './attempt-trace.js';
 
 type LogTx = ReturnType<typeof getDb>;
@@ -77,11 +77,13 @@ export function logRequest(
     // after parsing; null when logging outside a chat request or before the
     // shape probe ran.
     const shape = getRequestShape();
+    // Full inbound body (debug storage), set alongside the shape.
+    const requestBody = getRequestBody();
     const tx = db.transaction(() => {
       const insert = db.prepare(`
-        INSERT INTO requests (platform, model_id, key_id, status, input_tokens, output_tokens, latency_ms, error, ttfb_ms, requested_model, served_model, client_ip, client_user_agent, client_agent, message_count, role_sequence, has_tool_calls, has_reasoning)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `).run(platform, modelId, keyId, status, inputTokens, outputTokens, latencyMs, error, ttfbMs, requestedModel, servedModel, client.ip, client.userAgent, client.agent, shape?.messageCount ?? null, shape?.roleSequence ?? null, shape == null ? null : (shape.hasToolCalls ? 1 : 0), shape == null ? null : (shape.hasReasoning ? 1 : 0));
+        INSERT INTO requests (platform, model_id, key_id, status, input_tokens, output_tokens, latency_ms, error, ttfb_ms, requested_model, served_model, client_ip, client_user_agent, client_agent, message_count, role_sequence, has_tool_calls, has_reasoning, request_body)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(platform, modelId, keyId, status, inputTokens, outputTokens, latencyMs, error, ttfbMs, requestedModel, servedModel, client.ip, client.userAgent, client.agent, shape?.messageCount ?? null, shape?.roleSequence ?? null, shape == null ? null : (shape.hasToolCalls ? 1 : 0), shape == null ? null : (shape.hasReasoning ? 1 : 0), requestBody);
 
       // Report the row id back to the fallback loop's attempt trace (if one is
       // active): the LAST id noted during a loop run is the terminal row the

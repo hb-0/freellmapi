@@ -12,6 +12,11 @@ export interface ClientContext {
   // drill-down can answer "was this multi-turn / did it carry tool_calls?"
   // (#750) without storing dialog text.
   shape: RequestShape | null;
+  // Full inbound request body as JSON text (debug builds only): set alongside
+  // `shape` by the chat entry points, written to requests.request_body so a
+  // provider 4xx can be reproduced from the analytics drill-down. Image
+  // data-URIs are replaced and the payload capped (see serializeRequestBody).
+  body: string | null;
 }
 
 // The minimal per-request structure needed to reproduce a provider 4xx like
@@ -54,7 +59,7 @@ function clientLoggingEnabled(): boolean {
 
 export function clientContextMiddleware(req: Request, _res: Response, next: NextFunction): void {
   if (!clientLoggingEnabled()) {
-    storage.run({ ip: null, userAgent: null, agent: null, shape: null }, next);
+    storage.run({ ip: null, userAgent: null, agent: null, shape: null, body: null }, next);
     return;
   }
   const ua = req.headers['user-agent'];
@@ -63,11 +68,12 @@ export function clientContextMiddleware(req: Request, _res: Response, next: Next
     userAgent: typeof ua === 'string' ? ua.slice(0, 256) : null,
     agent: classifyClientAgent(req),
     shape: null,
+    body: null,
   }, next);
 }
 
 export function getClientContext(): ClientContext {
-  return storage.getStore() ?? { ip: null, userAgent: null, agent: null, shape: null };
+  return storage.getStore() ?? { ip: null, userAgent: null, agent: null, shape: null, body: null };
 }
 
 // Record the inbound messages' shape for the current request. Called by each
@@ -80,6 +86,59 @@ export function setRequestShape(shape: RequestShape | null): void {
 
 export function getRequestShape(): RequestShape | null {
   return storage.getStore()?.shape ?? null;
+}
+
+// Serialize an inbound request body for debug storage: image data-URIs are
+// replaced (a single vision turn can carry hundreds of KB of base64) and the
+// whole payload is capped so the analytics DB cannot grow unboundedly. The
+// cap lands on a JSON-text boundary; the frontend renders the text as-is when
+// JSON.parse fails, so the truncation marker is always visible.
+const MAX_REQUEST_BODY_LENGTH = 1_048_576; // 1 MiB
+const TRUNCATION_MARKER = '\n…truncated';
+
+function redactDataUrls(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(redactDataUrls);
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const [key, child] of Object.entries(value)) {
+      if (key === 'image_url' && child && typeof child === 'object') {
+        const img = child as Record<string, unknown>;
+        const url = typeof img.url === 'string' ? img.url : '';
+        out[key] = { ...img, url: url.startsWith('data:') ? '[data-url omitted]' : url };
+      } else {
+        out[key] = redactDataUrls(child);
+      }
+    }
+    return out;
+  }
+  return value;
+}
+
+export function serializeRequestBody(body: unknown): string | null {
+  if (body === undefined || body === null) return null;
+  try {
+    let json = JSON.stringify(redactDataUrls(body), null, 1);
+    if (json.length > MAX_REQUEST_BODY_LENGTH) {
+      json = `${json.slice(0, MAX_REQUEST_BODY_LENGTH - TRUNCATION_MARKER.length)}${TRUNCATION_MARKER}`;
+    }
+    return json;
+  } catch {
+    // Circular structures / non-serializable values: fall back to a plain
+    // string so the row still carries something debuggable.
+    return String(body).slice(0, MAX_REQUEST_BODY_LENGTH);
+  }
+}
+
+// Record the full inbound request body for the current request (debug
+// storage). Called by each chat entry point alongside setRequestShape();
+// logRequest() picks it up at insert time.
+export function setRequestBody(body: unknown): void {
+  const ctx = storage.getStore();
+  if (ctx) ctx.body = serializeRequestBody(body);
+}
+
+export function getRequestBody(): string | null {
+  return storage.getStore()?.body ?? null;
 }
 
 // Cap for the compressed role sequence stored per row: enough segments to

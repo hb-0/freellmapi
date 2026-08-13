@@ -617,6 +617,7 @@
     "shapeToolCalls": "With tool calls",
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
+    "requestBody": "Request body",
     "requestsByAgent": "ഏജൻ്റ് അനുസരിച്ചുള്ള അഭ്യർത്ഥനകൾ"
   },
   "playground": {

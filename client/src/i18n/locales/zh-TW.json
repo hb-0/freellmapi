@@ -616,6 +616,7 @@
     "shapeToolCalls": "含工具呼叫",
     "shapeThinking": "思考模式",
     "shapeSequence": "角色序列",
+    "requestBody": "請求體",
     "requestsByAgent": "按代理程式統計的請求"
   },
   "playground": {

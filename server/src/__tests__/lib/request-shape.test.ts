@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { summarizeRequestMessages } from '../../lib/client-context.js';
+import { summarizeRequestMessages, serializeRequestBody } from '../../lib/client-context.js';
 
 // summarizeRequestMessages is a loose structural probe over any inbound
 // protocol's messages array: it must survive OpenAI chat.completions, the
@@ -100,5 +100,49 @@ describe('summarizeRequestMessages', () => {
     expect(shape!.roleSequence.endsWith(',…')).toBe(true);
     expect(shape!.roleSequence.length).toBeLessThan(200);
     expect(JSON.stringify(shape)).not.toContain('secret dialogue');
+  });
+});
+
+describe('serializeRequestBody', () => {
+  it('returns null for undefined/null input', () => {
+    expect(serializeRequestBody(undefined)).toBeNull();
+    expect(serializeRequestBody(null)).toBeNull();
+  });
+
+  it('serializes a full body as pretty JSON with content intact', () => {
+    const body = {
+      model: 'deepseek-v4-flash',
+      messages: [
+        { role: 'user', content: 'hello' },
+        { role: 'assistant', content: 'hi', reasoning_content: 'thinking…' },
+      ],
+    };
+    const json = serializeRequestBody(body)!;
+    expect(JSON.parse(json)).toEqual(body);
+    expect(json).toContain('reasoning_content');
+    expect(json).toContain('thinking…');
+  });
+
+  it('redacts inline image data-URIs but keeps remote URLs', () => {
+    const body = {
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image_url', image_url: { url: 'data:image/png;base64,AAAA...' } },
+          { type: 'image_url', image_url: { url: 'https://example.com/a.png' } },
+        ],
+      }],
+    };
+    const json = serializeRequestBody(body)!;
+    expect(json).not.toContain('data:image/png');
+    expect(json).toContain('[data-url omitted]');
+    expect(json).toContain('https://example.com/a.png');
+  });
+
+  it('caps oversized payloads at 1 MiB with a visible truncation marker', () => {
+    const big = { messages: [{ role: 'user', content: 'x'.repeat(2_000_000) }] };
+    const json = serializeRequestBody(big)!;
+    expect(json.length).toBeLessThanOrEqual(1_048_576);
+    expect(json.endsWith('\n…truncated')).toBe(true);
   });
 });

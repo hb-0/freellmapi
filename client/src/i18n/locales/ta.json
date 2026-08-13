@@ -617,6 +617,7 @@
     "shapeToolCalls": "With tool calls",
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
+    "requestBody": "Request body",
     "requestsByAgent": "முகவர் வாரியாக கோரிக்கைகள்"
   },
   "playground": {

@@ -43,7 +43,7 @@ import {
 import { sanitizeProviderErrorMessage } from './error-redaction.js';
 import { newClientAbortError } from './error-classify.js';
 import { logRequest } from './request-log.js';
-import { setRequestShape, summarizeRequestMessages } from './client-context.js';
+import { setRequestShape, summarizeRequestMessages, setRequestBody } from './client-context.js';
 import { getStickyModel, setStickyModel } from '../routes/proxy.js';
 import type { CompletionOptions } from '../providers/base.js';
 
@@ -181,6 +181,9 @@ export async function runInboundChat(
   // (#750): message count, role sequence, tool_calls / thinking presence —
   // no content is retained.
   setRequestShape(summarizeRequestMessages(input.messages));
+  // Debug: keep the full inbound request so a provider 4xx can be reproduced
+  // from the analytics drill-down (image data-URIs redacted, capped at 1 MiB).
+  setRequestBody(input);
   // Downscale over-threshold inline images BEFORE estimation and routing so
   // token budgets, payload limits, and upstream transfers all see the shrunk
   // bytes (see lib/image-normalize.ts). Mutates the image blocks in place.

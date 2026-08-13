@@ -28,7 +28,7 @@ import type { ReasoningEffort } from '../lib/sampling-params.js';
 import { buildModelListing } from '../services/model-listing.js';
 import { compressRequest, formatCompressionHeader } from '../services/compression/pipeline.js';
 import { normalizeMessageImages } from '../lib/image-normalize.js';
-import { setRequestShape, summarizeRequestMessages } from '../lib/client-context.js';
+import { setRequestShape, summarizeRequestMessages, setRequestBody } from '../lib/client-context.js';
 
 // Anthropic-compatible Messages API (`POST /v1/messages`). This is a thin
 // translation layer over the SAME router/fallback/analytics machinery the
@@ -454,6 +454,9 @@ anthropicRouter.post('/messages', async (req: Request, res: Response) => {
   // (#750): message count, role sequence, tool_use / thinking presence — no
   // content is retained.
   setRequestShape(summarizeRequestMessages(body.messages));
+  // Debug: keep the full parsed body so a provider 4xx can be reproduced
+  // from the analytics drill-down (image data-URIs redacted, capped at 1 MiB).
+  setRequestBody(body);
   const requestedModel = body.model ?? 'auto';
   const routedModel = body.model?.startsWith('claude/')
     ? body.model.slice('claude/'.length)

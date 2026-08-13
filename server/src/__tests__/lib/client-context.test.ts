@@ -22,7 +22,7 @@ describe('clientContextMiddleware', () => {
 
   it('captures the socket peer address and user agent', () => {
     const ctx = contextFor(fakeReq({ 'user-agent': 'curl/8.6.0' }, '192.168.0.42'));
-    expect(ctx).toEqual({ ip: '192.168.0.42', userAgent: 'curl/8.6.0', agent: 'unknown', shape: null });
+    expect(ctx).toEqual({ ip: '192.168.0.42', userAgent: 'curl/8.6.0', agent: 'unknown', shape: null, body: null });
   });
 
   it('prefers the first X-Forwarded-For hop when trust proxy is enabled', () => {
@@ -47,10 +47,10 @@ describe('clientContextMiddleware', () => {
   it('stores nulls when REQUEST_ANALYTICS_LOG_CLIENT=false', () => {
     process.env.REQUEST_ANALYTICS_LOG_CLIENT = 'false';
     const ctx = contextFor(fakeReq({ 'user-agent': 'curl/8.6.0' }, '192.168.0.42'));
-    expect(ctx).toEqual({ ip: null, userAgent: null, agent: null, shape: null });
+    expect(ctx).toEqual({ ip: null, userAgent: null, agent: null, shape: null, body: null });
   });
 
   it('returns nulls outside any request scope', () => {
-    expect(getClientContext()).toEqual({ ip: null, userAgent: null, agent: null, shape: null });
+    expect(getClientContext()).toEqual({ ip: null, userAgent: null, agent: null, shape: null, body: null });
   });
 });

@@ -605,7 +605,7 @@ analyticsRouter.get('/requests/:id', (req: Request, res: Response) => {
     SELECT id, platform, model_id, requested_model, served_model, request_type, status,
            input_tokens, output_tokens, latency_ms, ttfb_ms, error,
            client_ip, client_user_agent, client_agent,
-           message_count, role_sequence, has_tool_calls, has_reasoning,
+           message_count, role_sequence, has_tool_calls, has_reasoning, request_body,
            strftime('%Y-%m-%dT%H:%M:%SZ', created_at) as created_at_iso
     FROM requests
     WHERE id = ?
@@ -647,6 +647,9 @@ analyticsRouter.get('/requests/:id', (req: Request, res: Response) => {
     roleSequence: r.role_sequence ?? null,
     hasToolCalls: r.has_tool_calls == null ? null : r.has_tool_calls === 1,
     hasReasoning: r.has_reasoning == null ? null : r.has_reasoning === 1,
+    // Debug: full inbound body JSON text (null for pre-migration rows or
+    // non-chat paths).
+    requestBody: r.request_body ?? null,
     createdAt: r.created_at_iso,
     attempts: attempts.map(a => ({
       ordinal: a.ordinal,
