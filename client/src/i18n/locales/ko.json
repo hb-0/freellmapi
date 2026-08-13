@@ -610,6 +610,13 @@
     "attemptTimingHint": "요청 시작부터 시작 오프셋 · 시도 기간",
     "requestedModel": "요청 모델",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "에이전트별 요청"
   },
   "playground": {

@@ -610,6 +610,12 @@
     "attemptTimingHint": "自请求开始的偏移 · 尝试耗时",
     "requestedModel": "请求的模型",
     "ttft": "首个词元用时",
+    "requestShape": "请求结构",
+    "requestShapeHint": "入站消息的结构摘要——从不存储内容本身。",
+    "shapeMessages": "{count} 条消息",
+    "shapeToolCalls": "含工具调用",
+    "shapeThinking": "思考模式",
+    "shapeSequence": "角色序列",
     "requestsByAgent": "按智能体统计的请求"
   },
   "playground": {

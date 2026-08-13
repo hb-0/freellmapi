@@ -605,6 +605,7 @@ analyticsRouter.get('/requests/:id', (req: Request, res: Response) => {
     SELECT id, platform, model_id, requested_model, served_model, request_type, status,
            input_tokens, output_tokens, latency_ms, ttfb_ms, error,
            client_ip, client_user_agent, client_agent,
+           message_count, role_sequence, has_tool_calls, has_reasoning,
            strftime('%Y-%m-%dT%H:%M:%SZ', created_at) as created_at_iso
     FROM requests
     WHERE id = ?
@@ -639,6 +640,13 @@ analyticsRouter.get('/requests/:id', (req: Request, res: Response) => {
     clientIp: r.client_ip,
     clientUserAgent: r.client_user_agent,
     clientAgent: r.client_agent,
+    // Inbound message shape (null for requests logged before the migration
+    // or outside the chat paths): count, compressed role sequence, and
+    // tool_calls / thinking presence — content is never stored.
+    messageCount: r.message_count ?? null,
+    roleSequence: r.role_sequence ?? null,
+    hasToolCalls: r.has_tool_calls == null ? null : r.has_tool_calls === 1,
+    hasReasoning: r.has_reasoning == null ? null : r.has_reasoning === 1,
     createdAt: r.created_at_iso,
     attempts: attempts.map(a => ({
       ordinal: a.ordinal,

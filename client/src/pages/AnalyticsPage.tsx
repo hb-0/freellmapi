@@ -9,6 +9,7 @@ import {
   ArrowDown,
   ArrowUp,
   Bot,
+  Braces,
   ChartLine,
   CheckCircle2,
   CircleAlert,
@@ -189,6 +190,12 @@ interface RequestAttempt {
 interface RequestDetail extends Omit<RecentCallRow, 'attemptCount'> {
   ttfbMs: number | null
   attempts: RequestAttempt[]
+  // Inbound message shape (#750): count / role sequence / tool_calls and
+  // thinking presence, null for pre-migration or non-chat rows.
+  messageCount: number | null
+  roleSequence: string | null
+  hasToolCalls: boolean | null
+  hasReasoning: boolean | null
 }
 
 type StatusFilter = 'all' | 'success' | 'error' | 'canceled'
@@ -276,6 +283,17 @@ function DetailField({ label, value, mono }: { label: string; value: React.React
   )
 }
 
+// One badge of the request-shape grid: a muted chip when the flag is absent
+// (pre-migration row or the attribute was not present), an emphasized chip
+// when it was.
+function ShapeBadge({ label, present }: { label: string; present: boolean }) {
+  return (
+    <div className={`rounded-lg border px-2.5 py-1.5 ${present ? 'border-primary/40 bg-primary/10 text-primary' : 'bg-muted/40 text-muted-foreground'}`}>
+      <p className="text-xs font-medium truncate">{label}</p>
+    </div>
+  )
+}
+
 // Per-request drill-down: the parent row's fields plus the failover ladder —
 // one entry per dispatched attempt (ordinal → provider/model → key ordinal →
 // outcome → timing, with the redacted per-hop error when one was recorded).
@@ -353,6 +371,25 @@ function RequestDetailDialog({ requestId, onClose }: { requestId: number | null;
               <div className="rounded-xl border border-destructive/30 bg-destructive/5 px-3 py-2">
                 <p className="text-[11px] text-destructive uppercase tracking-wider">{t('analytics.message')}</p>
                 <p className="text-xs text-destructive/90 mt-1 break-words">{detail.error}</p>
+              </div>
+            )}
+
+            {detail.messageCount != null && (
+              <div>
+                <h4 className="flex items-center gap-2 text-sm font-medium">
+                  <Braces className="size-4 text-muted-foreground" aria-hidden="true" />
+                  {t('analytics.requestShape')}
+                </h4>
+                <p className="text-xs text-muted-foreground mt-0.5">{t('analytics.requestShapeHint')}</p>
+                <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <ShapeBadge label={t('analytics.shapeMessages', { count: detail.messageCount })} present={detail.messageCount > 0} />
+                  <ShapeBadge label={t('analytics.shapeToolCalls')} present={detail.hasToolCalls === true} />
+                  <ShapeBadge label={t('analytics.shapeThinking')} present={detail.hasReasoning === true} />
+                  <div className="rounded-lg border bg-muted/40 px-2.5 py-1.5 min-w-0">
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{t('analytics.shapeSequence')}</p>
+                    <p className="text-xs font-mono tabular-nums truncate" title={detail.roleSequence ?? '—'}>{detail.roleSequence ?? '—'}</p>
+                  </div>
+                </div>
               </div>
             )}
 

@@ -610,6 +610,13 @@
     "attemptTimingHint": "ከጥያቄ ጅምር ማካካሻ ጀምር · የሙከራ ጊዜ",
     "requestedModel": "የተጠየቀው ሞዴል",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "ጥያቄዎች በወኪል"
   },
   "playground": {

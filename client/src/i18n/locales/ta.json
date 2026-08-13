@@ -610,6 +610,13 @@
     "attemptTimingHint": "கோரிக்கை தொடக்கத்திலிருந்து ஆஃப்செட்டைத் தொடங்கு · முயற்சி காலம்",
     "requestedModel": "கோரப்பட்ட மாதிரி",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "முகவர் வாரியாக கோரிக்கைகள்"
   },
   "playground": {

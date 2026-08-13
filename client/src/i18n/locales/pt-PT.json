@@ -610,6 +610,13 @@
     "attemptTimingHint": "Início deslocado a partir do início do pedido · Duração da tentativa",
     "requestedModel": "Modelo solicitado",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Pedidos por agente"
   },
   "playground": {

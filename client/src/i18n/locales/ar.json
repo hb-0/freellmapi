@@ -610,6 +610,13 @@
     "attemptTimingHint": "بداية الإزاحة من بداية الطلب · مدة المحاولة",
     "requestedModel": "النموذج المطلوب",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "الطلبات حسب الوكيل"
   },
   "playground": {

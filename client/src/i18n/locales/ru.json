@@ -610,6 +610,13 @@
     "attemptTimingHint": "Начальное смещение от начала запроса · продолжительность попытки",
     "requestedModel": "Запрошенная модель",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Запросы по агентам"
   },
   "playground": {

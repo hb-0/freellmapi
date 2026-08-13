@@ -610,6 +610,13 @@
     "attemptTimingHint": "അഭ്യർത്ഥന ആരംഭത്തിൽ നിന്ന് ഓഫ്സെറ്റ് ആരംഭിക്കുക · ശ്രമ കാലയളവ്",
     "requestedModel": "അഭ്യർത്ഥിച്ച മോഡൽ",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "ഏജൻ്റ് അനുസരിച്ചുള്ള അഭ്യർത്ഥനകൾ"
   },
   "playground": {

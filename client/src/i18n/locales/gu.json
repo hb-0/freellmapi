@@ -610,6 +610,13 @@
     "attemptTimingHint": "વિનંતીથી ઓફસેટ શરૂ કરો પ્રારંભ · પ્રયાસ અવધિ",
     "requestedModel": "વિનંતી કરેલ મોડેલ",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "એજન્ટ પ્રમાણે વિનંતીઓ"
   },
   "playground": {

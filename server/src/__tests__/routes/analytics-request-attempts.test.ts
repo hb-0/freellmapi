@@ -3,6 +3,9 @@ import type { Express } from 'express';
 import { createApp } from '../../app.js';
 import { getDb, initDb } from '../../db/index.js';
 import { mintDashboardToken } from '../helpers/auth.js';
+import { clientContextMiddleware } from '../../lib/client-context.js';
+import { setRequestShape, summarizeRequestMessages } from '../../lib/client-context.js';
+import { logRequest } from '../../lib/request-log.js';
 
 // Read surface for per-attempt routing traces: the requests list carries a
 // cheap attemptCount per row, and GET /api/analytics/requests/:id returns the
@@ -103,5 +106,59 @@ describe('per-attempt traces in the analytics requests API', () => {
 
     expect((await request(app, '/api/analytics/requests/999999')).status).toBe(404);
     expect((await request(app, '/api/analytics/requests/not-a-number')).status).toBe(400);
+  });
+
+  it('returns the inbound message shape and nulls for pre-migration rows', async () => {
+    const shaped = getDb().prepare(`
+      INSERT INTO requests (platform, model_id, status, input_tokens, output_tokens, latency_ms, error, message_count, role_sequence, has_tool_calls, has_reasoning, created_at)
+      VALUES ('cerebras', 'qwen-z', 'error', 10, 0, 50, 'boom', 5, 'user,assistant,tool,user', 1, 1, ?)
+    `).run(recentSql(14));
+    const legacy = insertRequest('error', recentSql(15));
+
+    const shapedDetail = await request(app, `/api/analytics/requests/${shaped.lastInsertRowid}`);
+    expect(shapedDetail.status).toBe(200);
+    expect(shapedDetail.body).toMatchObject({
+      messageCount: 5,
+      roleSequence: 'user,assistant,tool,user',
+      hasToolCalls: true,
+      hasReasoning: true,
+    });
+
+    const legacyDetail = await request(app, `/api/analytics/requests/${legacy}`);
+    expect(legacyDetail.status).toBe(200);
+    expect(legacyDetail.body).toMatchObject({
+      messageCount: null,
+      roleSequence: null,
+      hasToolCalls: null,
+      hasReasoning: null,
+    });
+  });
+
+  it('threads the inbound shape from the chat entry point into the logged row', async () => {
+    // Simulate what proxy/responses/anthropic do after request parsing: set
+    // the shape inside the middleware's request scope, then log.
+    const messages = [
+      { role: 'user', content: 'use the tool' },
+      { role: 'assistant', content: null, tool_calls: [{ id: 'c1', type: 'function', function: { name: 'ls', arguments: '{}' } }] },
+      { role: 'tool', tool_call_id: 'c1', content: 'a.txt' },
+      { role: 'user', content: 'again' },
+    ];
+    const fakeReq = { headers: {}, socket: { remoteAddress: '127.0.0.1' }, app: { get: () => false } } as any;
+    let loggedId = 0;
+    clientContextMiddleware(fakeReq, {} as any, () => {
+      setRequestShape(summarizeRequestMessages(messages));
+      logRequest('test', 'test-model', 1, 'success', 1, 2, 3, null);
+      loggedId = (getDb().prepare('SELECT id FROM requests ORDER BY id DESC LIMIT 1').get() as { id: number }).id;
+    });
+    expect(loggedId).toBeGreaterThan(0);
+
+    const { status, body } = await request(app, `/api/analytics/requests/${loggedId}`);
+    expect(status).toBe(200);
+    expect(body).toMatchObject({
+      messageCount: 4,
+      roleSequence: 'user,assistant,tool,user',
+      hasToolCalls: true,
+      hasReasoning: false,
+    });
   });
 });

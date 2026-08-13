@@ -610,6 +610,12 @@
     "attemptTimingHint": "自請求開始的偏移 · 嘗試耗時",
     "requestedModel": "請求的模型",
     "ttft": "首字延遲",
+    "requestShape": "請求結構",
+    "requestShapeHint": "入站訊息的结构摘要——從不儲存內容本身。",
+    "shapeMessages": "{count} 則訊息",
+    "shapeToolCalls": "含工具呼叫",
+    "shapeThinking": "思考模式",
+    "shapeSequence": "角色序列",
     "requestsByAgent": "按代理程式統計的請求"
   },
   "playground": {

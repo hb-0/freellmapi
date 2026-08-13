@@ -610,6 +610,13 @@
     "attemptTimingHint": "ចាប់ផ្តើមពីចំណុចចាប់ផ្តើម · រយៈពេលព្យាយាម",
     "requestedModel": "ម៉ូដែលដែលបានស្នើសុំ",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "សំណើតាមភ្នាក់ងារ"
   },
   "playground": {

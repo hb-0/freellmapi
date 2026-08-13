@@ -610,6 +610,13 @@
     "attemptTimingHint": "Bắt đầu bù đắp từ khi bắt đầu yêu cầu · thời gian thử",
     "requestedModel": "Mô hình được yêu cầu",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Yêu cầu theo tác nhân"
   },
   "playground": {

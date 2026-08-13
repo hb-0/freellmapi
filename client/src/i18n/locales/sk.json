@@ -610,6 +610,13 @@
     "attemptTimingHint": "Začať offset od začiatku požiadavky · Trvanie pokusu",
     "requestedModel": "Požadovaný model",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Požiadavky podľa agenta"
   },
   "playground": {

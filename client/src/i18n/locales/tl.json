@@ -610,6 +610,13 @@
     "attemptTimingHint": "Start offset mula sa request start · tagal ng pagtatangka",
     "requestedModel": "Hinihiling na modelo",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Mga kahilingan ayon sa agent"
   },
   "playground": {

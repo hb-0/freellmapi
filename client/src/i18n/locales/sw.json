@@ -610,6 +610,13 @@
     "attemptTimingHint": "Anza kukabiliana na ombi kuanza · muda wa jaribio",
     "requestedModel": "Umeomba muundo",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Maombi kwa kila wakala"
   },
   "playground": {

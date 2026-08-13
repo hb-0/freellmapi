@@ -610,6 +610,13 @@
     "attemptTimingHint": "İstek başlangıcından itibaren başlangıç dengelemesi · deneme süresi",
     "requestedModel": "İstenilen model",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Ajan başına istekler"
   },
   "playground": {

@@ -610,6 +610,13 @@
     "attemptTimingHint": "Offset dall'inizio della richiesta · durata del tentativo",
     "requestedModel": "Modello richiesto",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "Richieste per agente"
   },
   "playground": {

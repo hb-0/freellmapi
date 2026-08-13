@@ -610,6 +610,13 @@
     "attemptTimingHint": "विनंती पासून ऑफसेट सुरू करा प्रारंभ · प्रयत्न कालावधी",
     "requestedModel": "मॉडेलची विनंती केली",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "एजंटनुसार विनंत्या"
   },
   "playground": {

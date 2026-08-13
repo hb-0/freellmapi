@@ -610,6 +610,13 @@
     "attemptTimingHint": "অনুরোধ শুরু থেকে অফসেট শুরু করুন · প্রচেষ্টার সময়কাল",
     "requestedModel": "অনুরোধ করা মডেল",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "এজেন্ট অনুযায়ী অনুরোধ"
   },
   "playground": {

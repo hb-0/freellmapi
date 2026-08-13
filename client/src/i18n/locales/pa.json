@@ -610,6 +610,13 @@
     "attemptTimingHint": "ਬੇਨਤੀ ਸ਼ੁਰੂ ਤੋਂ ਔਫਸੈੱਟ ਸ਼ੁਰੂ ਕਰੋ · ਕੋਸ਼ਿਸ਼ ਦੀ ਮਿਆਦ",
     "requestedModel": "ਮਾਡਲ ਦੀ ਮੰਗ ਕੀਤੀ",
     "ttft": "TTFT",
+
+    "requestShape": "Request shape",
+    "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
+    "shapeMessages": "{count} message(s)",
+    "shapeToolCalls": "With tool calls",
+    "shapeThinking": "Thinking mode",
+    "shapeSequence": "Role sequence",
     "requestsByAgent": "ਏਜੰਟ ਦੁਆਰਾ ਬੇਨਤੀਆਂ"
   },
   "playground": {
