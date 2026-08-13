@@ -610,7 +610,6 @@
     "attemptTimingHint": "অনুরোধ শুরু থেকে অফসেট শুরু করুন · প্রচেষ্টার সময়কাল",
     "requestedModel": "অনুরোধ করা মডেল",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "এজেন্ট অনুযায়ী অনুরোধ"
+    "requestsByAgent": "এজেন্ট অনুযায়ী অনুরোধ",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "খেলার মাঠ",

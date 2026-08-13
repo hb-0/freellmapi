@@ -610,7 +610,6 @@
     "attemptTimingHint": "Start offset față de începutul cererii · Durata încercării",
     "requestedModel": "Modelul cerut",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Cereri per agent"
+    "requestsByAgent": "Cereri per agent",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Locul de joacă",

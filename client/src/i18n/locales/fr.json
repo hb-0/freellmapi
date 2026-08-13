@@ -610,7 +610,6 @@
     "attemptTimingHint": "Décalage depuis le début de la requête · durée de la tentative",
     "requestedModel": "Modèle demandé",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Requêtes par agent"
+    "requestsByAgent": "Requêtes par agent",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Bac à sable",

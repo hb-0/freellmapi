@@ -610,7 +610,6 @@
     "attemptTimingHint": "Sorğu başlanğıcından ofset · Cəhd müddəti",
     "requestedModel": "Tələb olunan model",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Agent üzrə sorğular"
+    "requestsByAgent": "Agent üzrə sorğular",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Uşaq meydançası",

@@ -610,7 +610,6 @@
     "attemptTimingHint": "درخواست کے آغاز سے آفسیٹ شروع کریں · کوشش کی مدت",
     "requestedModel": "ماڈل کی درخواست کی۔",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "فی ایجنٹ درخواستیں"
+    "requestsByAgent": "فی ایجنٹ درخواستیں",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "کھیل کا میدان",

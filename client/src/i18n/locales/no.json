@@ -610,7 +610,6 @@
     "attemptTimingHint": "Startforskyvning fra forespørselsstart · Forsøksvarighet",
     "requestedModel": "Etterspurt modell",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Forespørsler per agent"
+    "requestsByAgent": "Forespørsler per agent",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Lekeplass",

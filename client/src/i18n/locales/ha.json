@@ -610,7 +610,6 @@
     "attemptTimingHint": "Fara biya daga farkon buƙatun · lokacin ƙoƙarin",
     "requestedModel": "Samfurin da ake nema",
     "ttft": "Saukewa: TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Bukatu ta kowane wakili"
+    "requestsByAgent": "Bukatu ta kowane wakili",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "filin wasa",

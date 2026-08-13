@@ -610,7 +610,6 @@
     "attemptTimingHint": "Startoffset vom Anforderungsstart · Versuchsdauer",
     "requestedModel": "Angefragtes Modell",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Anfragen nach Agent"
+    "requestsByAgent": "Anfragen nach Agent",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Spielplatz",

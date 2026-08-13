@@ -38,6 +38,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { PageHeader } from '@/components/page-header'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip as HoverTooltip } from '@/components/tooltip'
+import { CopyButton } from '@/components/copy-button'
 import { formatSqliteUtcToLocalTime } from '@/lib/utils'
 import { platformColors } from '@/lib/routing'
 import { useI18n } from '@/i18n'
@@ -411,18 +412,25 @@ function RequestDetailDialog({ requestId, onClose }: { requestId: number | null;
 
             {detail.requestBody && (
               <div>
-                <button
-                  type="button"
-                  onClick={() => setBodyOpen(o => !o)}
-                  className="flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors hover:bg-muted/40"
-                  aria-expanded={bodyOpen}
-                >
-                  <span className="flex items-center gap-2 text-sm font-medium">
-                    <Braces className="size-4 text-muted-foreground" aria-hidden="true" />
-                    {t('analytics.requestBody')}
-                  </span>
-                  <ChevronDown className={`size-4 text-muted-foreground transition-transform ${bodyOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setBodyOpen(o => !o)}
+                    className="flex flex-1 items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left transition-colors hover:bg-muted/40"
+                    aria-expanded={bodyOpen}
+                  >
+                    <span className="flex items-center gap-2 text-sm font-medium">
+                      <Braces className="size-4 text-muted-foreground" aria-hidden="true" />
+                      {t('analytics.requestBody')}
+                    </span>
+                    <ChevronDown className={`size-4 text-muted-foreground transition-transform ${bodyOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+                  </button>
+                  <CopyButton
+                    text={formatRequestBody(detail.requestBody)}
+                    label={t('analytics.copyBody')}
+                    className="size-9 shrink-0"
+                  />
+                </div>
                 {bodyOpen && (
                   <pre className="mt-2 max-h-[300px] overflow-auto rounded-xl border bg-muted/40 p-3 text-[11px] leading-relaxed font-mono whitespace-pre-wrap break-words">
                     {formatRequestBody(detail.requestBody)}

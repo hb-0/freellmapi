@@ -610,7 +610,6 @@
     "attemptTimingHint": "တောင်းဆိုမှုစတင်ချိန်မှ စတင်အော့ဖ်ဆက် · ကြိုးစားမှုကြာချိန်",
     "requestedModel": "တောင်းဆိုထားသော မော်ဒယ်",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "အေးဂျင့်အလိုက် တောင်းဆိုမှုများ"
+    "requestsByAgent": "အေးဂျင့်အလိုက် တောင်းဆိုမှုများ",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "ကစားကွင်း",

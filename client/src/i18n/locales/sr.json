@@ -610,7 +610,6 @@
     "attemptTimingHint": "Почетак одступања од почетка захтева · трајање покушаја",
     "requestedModel": "Тражени модел",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Захтеви по агенту"
+    "requestsByAgent": "Захтеви по агенту",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Игралиште",

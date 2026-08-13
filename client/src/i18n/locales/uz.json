@@ -610,7 +610,6 @@
     "attemptTimingHint": "So'rov boshlanishidan boshlab ofsetni boshlash · urinish davomiyligi",
     "requestedModel": "So'ralgan model",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Agent bo'yicha so'rovlar"
+    "requestsByAgent": "Agent bo'yicha so'rovlar",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "O'yin maydonchasi",

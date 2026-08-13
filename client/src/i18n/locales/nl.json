@@ -610,7 +610,6 @@
     "attemptTimingHint": "Start offset van verzoek start · Duur van de poging",
     "requestedModel": "Aangevraagd model",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Verzoeken per agent"
+    "requestsByAgent": "Verzoeken per agent",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Speeltuin",

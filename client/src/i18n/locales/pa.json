@@ -610,7 +610,6 @@
     "attemptTimingHint": "ਬੇਨਤੀ ਸ਼ੁਰੂ ਤੋਂ ਔਫਸੈੱਟ ਸ਼ੁਰੂ ਕਰੋ · ਕੋਸ਼ਿਸ਼ ਦੀ ਮਿਆਦ",
     "requestedModel": "ਮਾਡਲ ਦੀ ਮੰਗ ਕੀਤੀ",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "ਏਜੰਟ ਦੁਆਰਾ ਬੇਨਤੀਆਂ"
+    "requestsByAgent": "ਏਜੰਟ ਦੁਆਰਾ ਬੇਨਤੀਆਂ",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "ਖੇਡ ਦਾ ਮੈਦਾਨ",

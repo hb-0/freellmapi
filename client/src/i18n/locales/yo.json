@@ -610,7 +610,6 @@
     "attemptTimingHint": "Bẹrẹ aiṣedeede lati ibere ibere · Iye akoko igbiyanju",
     "requestedModel": "Awoṣe ti a beere",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Awọn ibeere nipasẹ aṣoju"
+    "requestsByAgent": "Awọn ibeere nipasẹ aṣoju",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Ibi isereile",

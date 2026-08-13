@@ -610,7 +610,6 @@
     "attemptTimingHint": "Початковий зсув від початку запиту · тривалість спроби",
     "requestedModel": "Запитана модель",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Запити за агентами"
+    "requestsByAgent": "Запити за агентами",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Дитячий майданчик",

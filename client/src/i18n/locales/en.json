@@ -633,7 +633,8 @@
     "shapeToolCalls": "With tool calls",
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
-    "requestBody": "Request body"
+    "requestBody": "Request body",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Playground",

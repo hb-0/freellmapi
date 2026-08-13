@@ -610,7 +610,6 @@
     "attemptTimingHint": "Начальное смещение от начала запроса · продолжительность попытки",
     "requestedModel": "Запрошенная модель",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Запросы по агентам"
+    "requestsByAgent": "Запросы по агентам",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Детская площадка",

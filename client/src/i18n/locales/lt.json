@@ -610,7 +610,6 @@
     "attemptTimingHint": "Pradėti poslinkį nuo užklausos pradžios · Bandymo trukmė",
     "requestedModel": "Prašytas modelis",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Užklausos pagal agentą"
+    "requestsByAgent": "Užklausos pagal agentą",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Žaidimų aikštelė",

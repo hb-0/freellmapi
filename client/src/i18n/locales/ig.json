@@ -610,7 +610,6 @@
     "attemptTimingHint": "Malite nkwụsị site na mmalite arịrịọ · Ogologo oge nwaa",
     "requestedModel": "Ihe nlereanya achọrọ",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Arịrịọ site na ejenti"
+    "requestsByAgent": "Arịrịọ site na ejenti",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Ebe egwuregwu",

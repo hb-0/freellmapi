@@ -610,7 +610,6 @@
     "attemptTimingHint": "अनुरोध प्रारंभ · प्रयास अवधि से प्रारंभ ऑफसेट",
     "requestedModel": "अनुरोधित मॉडल",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "एजेंट के अनुसार अनुरोध"
+    "requestsByAgent": "एजेंट के अनुसार अनुरोध",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "खेल का मैदान",

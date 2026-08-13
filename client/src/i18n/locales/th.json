@@ -610,7 +610,6 @@
     "attemptTimingHint": "เริ่มต้นออฟเซ็ตจากคำขอเริ่มต้น · ระยะเวลาความพยายาม",
     "requestedModel": "รุ่นที่ขอ",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "คำขอตามเอเจนต์"
+    "requestsByAgent": "คำขอตามเอเจนต์",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "สนามเด็กเล่น",

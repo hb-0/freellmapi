@@ -610,7 +610,6 @@
     "attemptTimingHint": "Μετατόπιση έναρξης από την έναρξη αιτήματος · Διάρκεια προσπάθειας",
     "requestedModel": "Ζητούμενο μοντέλο",
     "ttft": "TTFT",
-
     "requestShape": "Request shape",
     "requestShapeHint": "Structural summary of the inbound messages — content is never stored.",
     "shapeMessages": "{count} message(s)",
@@ -618,7 +617,8 @@
     "shapeThinking": "Thinking mode",
     "shapeSequence": "Role sequence",
     "requestBody": "Request body",
-    "requestsByAgent": "Αιτήματα ανά πράκτορα"
+    "requestsByAgent": "Αιτήματα ανά πράκτορα",
+    "copyBody": "Copy body"
   },
   "playground": {
     "title": "Παιδική χαρά",
